@@ -1,0 +1,99 @@
+.img{    
+    width: 22%;
+    margin-left: 268px;
+}
+.mediaIcon1{
+    margin: 0px 0px 0px 56px;
+    font-size: 15px;
+    /* border: solid rebeccapurple; */
+    width: 50px;
+    /* color: rgba(10,111,243,255); */
+
+}
+
+.mediaIcon2{
+    margin: 0px 0px 0px 204px;
+    font-size: 15px;
+    /* border: solid red; */
+    width: 50px;
+    /* color: rgba(10,111,243,255); */
+
+}
+.mediaIcon3{
+    margin: -39px 0px 0px 529px;
+    font-size: 15px;
+    /* border: solid blue; */
+    width: 50px;
+    /* color: rgba(10,111,243,255); */
+
+}
+#dropdownMenuButton1{
+    color: rgba(10,111,243,255);
+    margin-left: 513px;
+    /* margin-bottom: -52px; */
+    margin-top: -94px;
+    font-size: 30px;
+    background-color: white;
+    border: white;
+}
+
+#iconId{
+    /* border: solid red; */
+    padding-top: 27px;
+    /* margin: 23px 23px 23px 23px; */
+    display: flex;
+
+}
+#gry{
+    color: gray;
+}
+#blue {
+ color:rgba(10,111,243,255);   
+}
+
+.result{
+    display: flex;
+}
+#red{
+    color: rgb(199, 60, 60);
+}
+#commentTextBox{
+    margin: 0px 0px 0px 151px;
+}
+#commnetButton{
+    background-color: rgba(10,111,243,255);
+    color: white;
+    
+}
+#commentSection{
+    margin: 7px 0px 0px 0px;
+    /* border: solid rgb(27, 193, 66); */
+    width: 81%;
+}
+.mediaIconFav3{ 
+    /* margin: -96px 0px 0px 529px; */
+    margin: -39px 0px 0px 529px;
+    font-size: 15px;
+    /* border: solid blue; */
+    width: 50px;
+    /* color: rgba(10,111,243,255); */
+   
+}
+.showComment{
+    /* border: solid red; */
+    width: 100%;
+    /* display: flex; */
+}
+.showComment li{
+    list-style: none;
+    margin: 4px 0px 0px 112px;
+    /* border: solid rebeccapurple; */
+    width: 67%;
+
+}
+#timeAgo{
+    margin: 0px 0px 0px 118px;
+    color: rgba(10,111,243,255);
+    position: relative;
+    font-size: 11px;
+}

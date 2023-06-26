@@ -1,0 +1,64 @@
+.mainDiv{
+    width: 55%;
+    text-align: center;
+    margin: auto;
+    width: 50%;
+    background-color: rgb(246, 243, 243);
+}
+.img{    
+    width: 22%;
+    margin-left: 268px;
+}
+/* .cardOfLike{
+    border: solid rebeccapurple;
+    width: 88%;
+    margin: 10px 0px 0px 39px;
+    background-color: white;
+} */
+#blue{
+   color:  rgba(10,111,243,255);   
+}
+/* .mediaIcon1{
+    margin: 0px 0px 0px 56px;
+    font-size: 15px;
+ 
+    width: 50px;
+    color: rgba(10,111,243,255);
+
+} */
+
+#insediconId{
+    /* border: solid red; */
+    padding-top: 27px;
+    /* margin: 23px 23px 23px 23px; */
+    /* padding: 0px 0px 0px 0px; */
+    display: flex;
+}
+#red{
+    color: rgb(228, 73, 73);
+}
+.profileMedIaIcon1{
+    margin: 0px 0px 0px 83px;
+    /* border: solid purple; */
+
+}
+.profileMedIaIcon2{
+    margin: 0px 0px 0px 401px;
+    /* border: solid pink; */
+}
+/* .likeCount{
+    color: black;
+}
+.mediaIcon2{
+    margin: 0px 0px 0px 0px;
+    font-size: 15px;
+    width: 50px;
+}
+.mediaIcon3{
+    margin: 0px 0px 0px 0px;
+    font-size: 15px;
+    width: 50px;
+}
+.hashtag{
+    color: rgba(10,111,243,255);
+} */

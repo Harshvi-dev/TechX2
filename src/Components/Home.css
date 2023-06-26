@@ -1,0 +1,62 @@
+.HomeDiv{
+    /* background-color: aqua; */
+    /* border: solid red; */
+    width: 55%;
+    text-align: center;
+    margin: auto;
+    width: 50%;
+    background-color: rgb(246, 243, 243);
+}
+.postText{
+    border-radius: 10px;
+    border: solid #78b0f8;
+    background-color: white;
+    color: rgb(75, 70, 70);
+    font-size: 20px;
+    width: 40%;
+    padding: 23px 23px 23px 23px;
+    margin-top: 23px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.postText::-webkit-input-placeholder {
+    color: #b7b7b8;
+    font-weight: bold;
+}
+#logOut{
+    width: 7%;
+    border-radius: 10px;
+    background-color: rgba(10,111,243,255);
+    color: white;
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    position: absolute;
+    right: 0px;
+    margin: 23px 23px 23px 23px;
+    border: rgba(10,111,243,255);
+}
+
+.icon{
+    margin: 0px 124px 0px 61px;
+    font-size: 15px;
+    color: rgba(10,111,243,255);
+
+}
+#profilePic{
+    width: 11%;
+    border-radius: 10px;
+    background-color: rgba(10,111,243,255);
+    color: white;
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    position: absolute;
+    right: 0px;
+    margin: -89px 48px 0px 0px;
+    border: rgba(10,111,243,255);   
+}
+.mediaOfNav {
+    /* border: solid fuchsia; */
+    position: absolute;
+    top: 8px;
+    right: 16px;
+    /* font-size: 18px; */
+}
