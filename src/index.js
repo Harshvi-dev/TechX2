@@ -21,9 +21,9 @@ TimeAgo.addDefaultLocale(en)
 TimeAgo.addLocale(ru)
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <BrowserRouter>
+  <BrowserRouter basename={process.env.PUBLIC_URL}>
     <Routes>
-      <Route path='/TechX' Component={SignIn}/>
+      <Route path='/' Component={SignIn}/>
       <Route path='/SignIn' Component={SignIn}/>
       <Route path='/Home' Component={Home}/>
       <Route path='/AddPost' Component={AddPost}/>
