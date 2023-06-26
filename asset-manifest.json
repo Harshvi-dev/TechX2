@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/TechX2/static/css/main.25cedea2.css",
+    "main.js": "/TechX2/static/js/main.1ddcdb10.js",
+    "static/js/787.d387fa83.chunk.js": "/TechX2/static/js/787.d387fa83.chunk.js",
+    "index.html": "/TechX2/index.html",
+    "main.25cedea2.css.map": "/TechX2/static/css/main.25cedea2.css.map",
+    "main.1ddcdb10.js.map": "/TechX2/static/js/main.1ddcdb10.js.map",
+    "787.d387fa83.chunk.js.map": "/TechX2/static/js/787.d387fa83.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.25cedea2.css",
+    "static/js/main.1ddcdb10.js"
+  ]
+}
