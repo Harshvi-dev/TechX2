@@ -23,7 +23,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
     <Routes>
-      <Route path='/' Component={SignIn}/>
+      <Route path='/TechX' Component={SignIn}/>
       <Route path='/SignIn' Component={SignIn}/>
       <Route path='/Home' Component={Home}/>
       <Route path='/AddPost' Component={AddPost}/>
