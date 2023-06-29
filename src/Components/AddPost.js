@@ -36,7 +36,7 @@ const AddPost = () => {
   const [likePost, setLikePost] = useState([]);
   const [favPost, setFavPost] = useState([]);
   const [commentPost, setCommentPost] = useState([]);
-  const [userData , setUserData] = useState([])
+  const [userData, setUserData] = useState([]);
 
   let regResult;
   let dec;
@@ -44,77 +44,76 @@ const AddPost = () => {
   const auth = getAuth();
   const user = auth.currentUser;
 
-  
-    const getUserData = async() => {
-      const Ref = databaseRef(database, "user/");
+  const getUserData = async () => {
+    const Ref = databaseRef(database, "user/");
     await onValue(Ref, (snapshot) => {
       const data = snapshot.val();
       console.log("DATA", data);
       if (data) {
-         const newUser = Object.keys(data).map((key) => ({
+        const newUser = Object.keys(data).map((key) => ({
           id: key,
           ...data[key],
         }));
         // setUserData(newUser)
         console.log("POST DATA", newUser);
-        notify(newUser)
+        notify(newUser);
       }
       // sendNotificationToUser()
     });
-      
-    }
+  };
   var current = new Date();
 
-    const notify = (users) => {
-      console.log("users :" , users)
-      for (let i = 0; i < users.length; i++) {
-        console.log("i:",users[i])
-        if (users[i].user_id === user.email) { continue; }else{sendMessage(users[i].token)}
+  const notify = (users) => {
+    console.log("users :", users);
+    for (let i = 0; i < users.length; i++) {
+      console.log("i:", users[i]);
+      if (users[i].user_id === user.email) {
+        continue;
+      } else {
+        sendMessage(users[i].token);
       }
-      
     }
+  };
 
-    
+  const sendMessage = async (token) => {
+    const accessToken = token;
 
-    const sendMessage = async (token) => {
-      const accessToken = token;
-  
-      // NEW IMPLEMENT
-  
-      const FIREBASE_API_KEY =
-        "AAAAmkVJRBg:APA91bHCkkQg-omxDIDJ9MoEBsqgJ2x66BuyPBakh9VSOaS027TNdvhtxecABB__JfuAG2LqMzK-J0GKoAoZIU46hGlR18mkQq6gc0QylhyX0DZrMjVWB1JouHVzE4oAe607K-0hVtsA";
-  
-      const message = {
-        registration_ids: [accessToken],
-        notification: {
-          title: `${user.displayName}`,
-          body: "New Post Added",
-          vibrate: 1,
-          sound: 1,
-          show_in_foreground: true,
-          priority: "high",
-          content_available: true,
-        },
-      };
-  
-      let headers = new Headers({
-        "Content-Type": "application/json",
-        Authorization: "key=" + FIREBASE_API_KEY,
-      });
-  
-      try {
-        let response = await fetch("https://fcm.googleapis.com/fcm/send", {
-          method: "POST",
-          headers,
-          body: JSON.stringify(message),
-        });
-        console.log("=><*", response);
-        response = await response.json();
-        console.log("=><*", response);
-      } catch (error) {
-        console.log("ERROR WHILE SEND PUSH NOTIFICATION", error);
-      }
+    // NEW IMPLEMENT
+
+    const FIREBASE_API_KEY =
+      "AAAAmkVJRBg:APA91bHCkkQg-omxDIDJ9MoEBsqgJ2x66BuyPBakh9VSOaS027TNdvhtxecABB__JfuAG2LqMzK-J0GKoAoZIU46hGlR18mkQq6gc0QylhyX0DZrMjVWB1JouHVzE4oAe607K-0hVtsA";
+
+    const message = {
+      registration_ids: [accessToken],
+      notification: {
+        title: `${user.displayName}`,
+        body: "New Post Added",
+        vibrate: 1,
+        sound: 1,
+        show_in_foreground: true,
+        priority: "high",
+        content_available: true,
+      },
     };
+
+    let headers = new Headers({
+      "Content-Type": "application/json",
+      Authorization: "key=" + FIREBASE_API_KEY,
+    });
+
+    try {
+      let response = await fetch("https://fcm.googleapis.com/fcm/send", {
+        method: "POST",
+        headers,
+        body: JSON.stringify(message),
+      });
+      console.log("=><*", response);
+      response = await response.json();
+      console.log("=><*", response);
+    } catch (error) {
+      console.log("ERROR WHILE SEND PUSH NOTIFICATION", error);
+    }
+  };
 
   useEffect(() => {
     console.log("url :", url);
@@ -128,10 +127,9 @@ const AddPost = () => {
     // console.log("edit like :", likePost);
     // console.log("edit fav :", favPost);
     // console.log("edit comment :", commentPost);
-    
+
     // console.log("POST DATA", userdata);
     // getUserData()
-
   }, [url, imageUrls]);
 
   // onMessageListener().then((payload) => {
@@ -205,8 +203,8 @@ const AddPost = () => {
     }
     // setText(dec)
     // console.log("desciption after removing #:", text);
-    
-  getUserData()
+
+    getUserData();
     // alert("hello")
 
     // let arr = [];
@@ -281,14 +279,14 @@ const AddPost = () => {
       description: dec,
       hash: regResult || [],
       imageURL: arr,
-      user_id: localStorage.getItem("email"),
+      user_id: user.email,
       date: JSON.stringify(current),
       like: [],
       fav: [],
       Comment: [],
       photo_url: user.photoURL,
       user_name: user.displayName,
-    })
+    });
     toast("Post added!");
     setTimeout(() => {
       navigate("/home");
@@ -329,7 +327,6 @@ const AddPost = () => {
               <source src={iteam.file} />
             </video>
           )}
-          {/* {vidImg?<video id="vid"> <source src={iteam}/></video>:<video id="vid"> <source src={iteam}/></video>} */}
           <button className="imgDel" onClick={del} id={index}>
             <i className="fa-solid fa-xmark"></i>
           </button>
@@ -400,105 +397,221 @@ const AddPost = () => {
     }, 3000);
   };
 
+  // return (
+  //   <>
+  //     <div className="HomeDiv">
+  //       <div className="justify">
+  //         {id === undefined ? (
+  //           <h2 className="title">Create Post</h2>
+  //         ) : (
+  //           <h2 className="title">Edit Post</h2>
+  //         )}
+  //         <button className="icon" onClick={back}>
+  //           <i className="fa-solid fa-xmark"></i>
+  //         </button>
+  //       </div>
+  //       <hr />
+
+  //       {!!cmp ? (
+  //         <>
+  //           <div>
+  //             <textarea
+  //               className="tArea"
+  //               rows="30"
+  //               cols="500"
+  //               value={text}
+  //               onChange={getVal}
+  //             />
+  //           </div>
+  //           <div className="showImg">
+  //             {url &&
+  //               url.length > 0 &&
+  //               url.map((iteam, index) => printImg(iteam, index))}
+  //           </div>
+  //           <div className="photo">
+  //             <label htmlFor="file-input">
+  //               <i className="fa-sharp fa-solid fa-image" id="photoIcon"></i>
+  //             </label>
+  //             <p>Photo/Video</p>
+  //             <input
+  //               type="file"
+  //               id="file-input"
+  //               accept="image/png , image/jpeg,video/mp4,video/x-m4v"
+  //               onChange={srcImg}
+  //             />
+  //           </div>
+  //           <div className="Cam" onClick={handelCam}>
+  //             <i className="fa-solid fa-camera" id="photoIcon"></i>
+  //             <p>Camera</p>
+  //           </div>
+  //         </>
+  //       ) : (
+  //         <div>
+  //           <Camera
+  //             setcmaUrl={setUploadImg}
+  //             setadd={addSetUrl}
+  //             setcmp={setcmp}
+  //           />
+  //         </div>
+  //       )}
+  //       {id === undefined ? (
+  //         <div>
+  //           {console.log(
+  //             "text:",
+  //             text,
+  //             "url:",
+  //             url.length,
+  //             "image:",
+  //             imageUrls.length
+  //           )}
+  //           <button
+  //             className="Post"
+  //             disabled={url.length == 0 && text == ""}
+  //             onClick={addPost}
+  //           >
+  //             <b>Post</b>
+  //           </button>
+  //         </div>
+  //       ) : (
+  //         <div>
+  //           <button
+  //             className="Post"
+  //             disabled={url && url.length == 0 && text == ""}
+  //             onClick={addPost}
+  //           >
+  //             <b>Edit</b>
+  //           </button>
+  //         </div>
+  //       )}
+
+  //       <ToastContainer
+  //         position="bottom-center"
+  //         autoClose={5000}
+  //         hideProgressBar={false}
+  //         newestOnTop={false}
+  //         closeOnClick
+  //         rtl={false}
+  //         pauseOnFocusLoss
+  //         draggable
+  //         pauseOnHover
+  //         theme="dark"
+  //       />
+  //     </div>
+  //   </>
+  // );
   return (
     <>
-      <div className="HomeDiv">
-        <div className="justify">
+      <div className="row justify-content-center ">
+        <div className="col-5" style={{ textAlign: "center" }}>
           {id === undefined ? (
             <h2 className="title">Create Post</h2>
           ) : (
             <h2 className="title">Edit Post</h2>
           )}
+        </div>
+        <div className="col-3" style={{ textAlign: "center" }}>
           <button className="icon" onClick={back}>
             <i className="fa-solid fa-xmark"></i>
           </button>
         </div>
-        <hr />
-
-        {!!cmp ? (
-          <>
+      </div>
+      <div className="row justify-content-center ">
+        <div className="col-12">
+          <hr />
+        </div>
+      </div>
+      <div className="row justify-content-center ">
+        <div className="col-lg-auto col-sm-auto ">
+          {!!cmp ? (
+            <>
+              <div>
+                {" "}
+                <textarea
+                  className="tArea"
+                  rows="15"
+                  cols="100"
+                  value={text}
+                  onChange={getVal}
+                  placeholder="make a post!"
+                />
+              </div>
+              <div className="row justify-content-center">
+                <div className="col-12"style={{border:"solid red"}}>
+                <div className="showImg">
+                  {url &&
+                    url.length > 0 &&
+                    url.map((iteam, index) => printImg(iteam, index))}
+                </div>
+              </div>
+              </div>
+              <div className="row">
+                <div className="col-5 col-sm-5" style={{ textAlign: "center" }}>
+                  <div className="photo">
+                    <label htmlFor="file-input">
+                      <i
+                        className="fa-sharp fa-solid fa-image"
+                        id="photoIcon"
+                      ></i>
+                    </label>
+                    <p>Photo/Video</p>
+                    <input
+                      type="file"
+                      id="file-input"
+                      accept="image/png , image/jpeg,video/mp4,video/x-m4v"
+                      onChange={srcImg}
+                    />
+                  </div>
+                </div>
+                <div className="col-2"></div>
+                <div className="col-5" style={{ textAlign: "center" }}>
+                  <div className="Cam" onClick={handelCam}>
+                    <i className="fa-solid fa-camera" id="photoIcon"></i>
+                    <p>Camera</p>
+                  </div>
+                </div>
+              </div>
+              <div className="row">
+                {id === undefined ? (
+                  <div className="col-12" style={{ textAlign:"center"}}>
+                    {console.log(
+                      "text:",
+                      text,
+                      "url:",
+                      url.length,
+                      "image:",
+                      imageUrls.length
+                    )}
+                    <button
+                      className="Post"
+                      disabled={url.length == 0 && text == ""}
+                      onClick={addPost}
+                    >
+                      <b>Post</b>
+                    </button>
+                  </div>
+                ) : (
+                  <div >
+                    <button
+                      className="Post"
+                      disabled={url && url.length == 0 && text == ""}
+                      onClick={addPost}
+                    >
+                      <b>Edit</b>
+                    </button>
+                  </div>
+                )}
+              </div>
+            </>
+          ) : (
             <div>
-              <textarea
-                className="tArea"
-                rows="30"
-                cols="500"
-                value={text}
-                onChange={getVal}
+              <Camera
+                setcmaUrl={setUploadImg}
+                setadd={addSetUrl}
+                setcmp={setcmp}
               />
             </div>
-            <div className="showImg">
-              {url &&
-                url.length > 0 &&
-                url.map((iteam, index) => printImg(iteam, index))}
-            </div>
-            <div className="photo">
-              <label htmlFor="file-input">
-                <i className="fa-sharp fa-solid fa-image" id="photoIcon"></i>
-              </label>
-              <p>Photo/Video</p>
-              <input
-                type="file"
-                id="file-input"
-                accept="image/png , image/jpeg,video/mp4,video/x-m4v"
-                onChange={srcImg}
-              />
-            </div>
-            <div className="Cam" onClick={handelCam}>
-              <i className="fa-solid fa-camera" id="photoIcon"></i>
-              <p>Camera</p>
-            </div>
-          </>
-        ) : (
-          <div>
-            <Camera
-              setcmaUrl={setUploadImg}
-              setadd={addSetUrl}
-              setcmp={setcmp}
-            />
-          </div>
-        )}
-        {id === undefined ? (
-          <div>
-            {console.log(
-              "text:",
-              text,
-              "url:",
-              url.length,
-              "image:",
-              imageUrls.length
-            )}
-            <button
-              className="Post"
-              disabled={url.length == 0 && text == ""}
-              onClick={addPost}
-            >
-              <b>Post</b>
-            </button>
-          </div>
-        ) : (
-          <div>
-            <button
-              className="Post"
-              disabled={url && url.length == 0 && text == ""}
-              onClick={addPost}
-            >
-              <b>Edit</b>
-            </button>
-          </div>
-        )}
-
-        <ToastContainer
-          position="bottom-center"
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="dark"
-        />
+          )}
+        </div>
       </div>
     </>
   );

@@ -1,6 +1,4 @@
-.HomeDiv{
-    /* background-color: aqua; */
-    /* border: solid red; */
+/* .HomeDiv{
     width: 55%;
     text-align: center;
     margin: auto;
@@ -54,9 +52,25 @@
     border: rgba(10,111,243,255);   
 }
 .mediaOfNav {
-    /* border: solid fuchsia; */
     position: absolute;
     top: 8px;
     right: 16px;
-    /* font-size: 18px; */
+} */
+.postText{
+    border-radius: 10px;
+    border: solid #78b0f8;
+    background-color: white;
+    color: rgb(75, 70, 70);
+    font-size: 20px;
+    width: auto;
+    padding: 23px 23px 23px 23px;
+    margin-top: 30px;       
+    font-family: Arial, Helvetica, sans-serif;
+}
+.postText::-webkit-input-placeholder {
+    color: #b7b7b8;
+    font-weight: bold;
+}
+#dropdownMenuButton{
+    margin-top: 23px;
 }

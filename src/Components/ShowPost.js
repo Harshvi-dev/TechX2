@@ -16,6 +16,7 @@ import {
 import ReactTimeAgo from "react-time-ago";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { endAt } from "firebase/firestore";
 
 const ShowPost = ({ post }) => {
   const [showTextBox, setShowTextBox] = useState(null);
@@ -60,9 +61,8 @@ const ShowPost = ({ post }) => {
     remove(Ref).then(() => {
       // alert("data deleted");
       toast("Post deleted ", {
-        position: toast.POSITION.BOTTOM_CENTER
+        position: toast.POSITION.BOTTOM_CENTER,
       });
-      
     });
   };
 
@@ -211,207 +211,428 @@ const ShowPost = ({ post }) => {
       }
     }
   };
-  return (
-    <>
-    <div className="container">
-      <div className="row"></div>
-      {post.map((item, index) => {
-        console.log(
-          "inside main return functioin value of showTextBox :",
-          item
-        );
-        return (
-          <div className="container" key={item.id}>
-            <div className="card mt-5">
-              <div className="card-body">
-                <div className="media">
-                  <img
-                    src={item.photo_url}
-                    className="mr-3 rounded-circle"
-                    alt="Profile Picture"
-                    style={{ width: 60 }}
-                  />
-                  {user.email == item.user_id ? (
-                    <div className="dropdown">
-                      <button
-                        className="btn btn-secondary"
-                        type="button"
-                        id="dropdownMenuButton1"
-                        data-bs-toggle="dropdown"
-                        aria-expanded="false"
-                      >
-                        <i className="fa-solid fa-ellipsis"></i>
-                      </button>
-                      <ul
-                        className="dropdown-menu"
-                        aria-labelledby="dropdownMenuButton1"
-                      >
-                        <li>
-                          <a
-                            key={item.id}
-                            className="dropdown-item"
-                            onClick={() => edit(item.id)}
-                          >
-                            Edit
-                          </a>
-                        </li>
-                        <li>
-                          <a
-                            className="dropdown-item"
-                            onClick={() => del(item.id)}
-                          >
-                            Delete
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
-                  ) : (
-                    <></>
-                  )}
-                  <ToastContainer
-                    position="bottom-center"
-                    autoClose={5000}
-                    hideProgressBar={false}
-                    newestOnTop={false}
-                    closeOnClick
-                    rtl={false}
-                    pauseOnFocusLoss
-                    draggable
-                    pauseOnHover
-                    theme="dark"
-                  />
-                  {/* <div className="media-body"> */}
-                  <h5 className="mt-0">{item.user_name}</h5>
-                  <div>
-                    <ReactTimeAgo date={JSON.parse(item.date)} locale="en-US" />
-                  </div>
+  // return (
+  //   <>
+  //   <div className="container">
+  //     {post.map((item, index) => {
+  //       console.log(
+  //         "inside main return functioin value of showTextBox :",
+  //         item
+  //       );
+  //       return (
+  //         <div className="container" key={item.id}>
+  //           <div className="card mt-5">
+  //             <div className="card-body">
+  //               <div className="media">
+  //                 <img
+  //                   src={item.photo_url}
+  //                   className="mr-3 rounded-circle"
+  //                   alt="Profile Picture"
+  //                   style={{ width: 60 }}
+  //                 />
+  //                 {user.email == item.user_id ? (
+  //                   <div className="dropdown">
+  //                     <button
+  //                       className="btn btn-secondary"
+  //                       type="button"
+  //                       id="dropdownMenuButton1"
+  //                       data-bs-toggle="dropdown"
+  //                       aria-expanded="false"
+  //                     >
+  //                       <i className="fa-solid fa-ellipsis"></i>
+  //                     </button>
+  //                     <ul
+  //                       className="dropdown-menu"
+  //                       aria-labelledby="dropdownMenuButton1"
+  //                     >
+  //                       <li>
+  //                         <a
+  //                           key={item.id}
+  //                           className="dropdown-item"
+  //                           onClick={() => edit(item.id)}
+  //                         >
+  //                           Edit
+  //                         </a>
+  //                       </li>
+  //                       <li>
+  //                         <a
+  //                           className="dropdown-item"
+  //                           onClick={() => del(item.id)}
+  //                         >
+  //                           Delete
+  //                         </a>
+  //                       </li>
+  //                     </ul>
+  //                   </div>
+  //                 ) : (
+  //                   <></>
+  //                 )}
+  //                 <ToastContainer
+  //                   position="bottom-center"
+  //                   autoClose={5000}
+  //                   hideProgressBar={false}
+  //                   newestOnTop={false}
+  //                   closeOnClick
+  //                   rtl={false}
+  //                   pauseOnFocusLoss
+  //                   draggable
+  //                   pauseOnHover
+  //                   theme="dark"
+  //                 />
+  //                 {/* <div className="media-body"> */}
+  //                 <h5 className="mt-0">{item.user_name}</h5>
+  //                 <div>
+  //                   <ReactTimeAgo date={JSON.parse(item.date)} locale="en-US" />
+  //                 </div>
 
-                  <p>
-                    {item.description}{" "}
-                    {item.hash &&
-                      item.hash.length > 0 &&
-                      item.hash.map((hashTag, hasindex) => {
-                        return (
-                          <span key={hasindex} className="hashtag">
-                            {hashTag}
-                          </span>
-                        );
-                      })}
-                  </p>
-                  <Slider {...settings}>
-                    {item.imageURL &&
-                      item.imageURL.length > 0 &&
-                      item.imageURL.map((singleImage) => {
-                        console.log("singleImage:", singleImage);
-                        return (
-                          <div key={singleImage.file}>
-                            {singleImage.type.includes("image") ? (
-                              <img
-                                src={singleImage.file}
-                                alt="Post Image"
-                                className="img"
-                              />
-                            ) : (
-                              <video className="img">
-                                <source src={singleImage.file}></source>
-                              </video>
-                            )}
-                          </div>
-                        );
-                      })}
-                  </Slider>
-                  
-                  <div className="text-muted mt-2" id="iconId">
-                    <div className="mediaIcon1">
-                      <span
-                        id={setColor(item.like) === "gry" ? "gry" : "blue"}
-                        onClick={() => likePost(item.id, item.like)}
-                      >
-                        <i className="fa-sharp fa-solid fa-thumbs-up fa-2xl" />
-                      </span>
-                      <p className="likeCount">
-                        {item.like === undefined ? " " : item.like.length}
+  //                 <p>
+  //                   {item.description}{" "}
+  //                   {item.hash &&
+  //                     item.hash.length > 0 &&
+  //                     item.hash.map((hashTag, hasindex) => {
+  //                       return (
+  //                         <span key={hasindex} className="hashtag">
+  //                           {hashTag}
+  //                         </span>
+  //                       );
+  //                     })}
+  //                 </p>
+  //                 <Slider {...settings}>
+  //                   {item.imageURL &&
+  //                     item.imageURL.length > 0 &&
+  //                     item.imageURL.map((singleImage) => {
+  //                       console.log("singleImage:", singleImage);
+  //                       return (
+  //                         <div key={singleImage.file}>
+  //                           {singleImage.type.includes("image") ? (
+  //                             <img
+  //                               src={singleImage.file}
+  //                               alt="Post Image"
+  //                               className="img"
+  //                             />
+  //                           ) : (
+  //                             <video className="img">
+  //                               <source src={singleImage.file}></source>
+  //                             </video>
+  //                           )}
+  //                         </div>
+  //                       );
+  //                     })}
+  //                 </Slider>
+
+  //                 <div className="text-muted mt-2" id="iconId">
+  //                   <div className="mediaIcon1">
+  //                     <span
+  //                       id={setColor(item.like) === "gry" ? "gry" : "blue"}
+  //                       onClick={() => likePost(item.id, item.like)}
+  //                     >
+  //                       <i className="fa-sharp fa-solid fa-thumbs-up fa-2xl" />
+  //                     </span>
+  //                     <p className="likeCount">
+  //                       {item.like === undefined ? " " : item.like.length}
+  //                     </p>
+  //                   </div>
+  //                   <div className="mediaIcon2">
+  //                     <span
+  //                       id={setColor(item.comment) === "gry" ? "gry" : "blue"}
+  //                       onClick={() =>
+  //                         commentPost(item.id, item.comment, index)
+  //                       }
+  //                     >
+  //                       {console.log("index : ", index)}
+  //                       {console.log("value of showTextBox :", showTextBox)}
+  //                       <i className="fa-sharp fa-solid fa-comments fa-2xl" />
+  //                     </span>
+  //                   </div>
+  //                 </div>
+
+  //                 <div className={favCss ? "mediaIconFav3" : "mediaIcon3"}>
+  //                   <span
+  //                     id={setColorOfHeart(item.fav) === "gry" ? "gry" : "red"}
+  //                     onClick={() => favPost(item.id, item.fav)}
+  //                   >
+  //                     <i className="fa-sharp fa-solid fa-heart fa-2xl" />
+  //                   </span>
+  //                   <p className="favCount">
+  //                     {item.fav === undefined ? " " : item.fav.length}
+  //                   </p>
+  //                 </div>
+  //               </div>
+  //               {showTextBox === index ? (
+  //                 <div className="com">
+  //                   <div className="showComment">
+  //                     {item.comment === undefined
+  //                       ? ""
+  //                       : item.comment.map((c) => {
+  //                           return (
+  //                             <>
+  //                               <li>
+  //                                 {c.user_name} : {c.text}
+  //                                 <ReactTimeAgo
+  //                                   date={JSON.parse(c.date)}
+  //                                   locale="en-US"
+  //                                   id="timeAgo"
+  //                                 />
+  //                               </li>
+  //                             </>
+  //                           );
+  //                         })}
+  //                   </div>
+  //                   <div className="input-group mb-3" id="commentSection">
+  //                     <input
+  //                       type="text"
+  //                       className="form-control"
+  //                       placeholder="Add comment"
+  //                       aria-label="Recipient's username"
+  //                       aria-describedby="basic-addon2"
+  //                       id="commentTextBox"
+  //                       value={text}
+  //                       onChange={commentText}
+  //                     />
+  //                     <div className="input-group-append">
+  //                       <span
+  //                         className="input-group-text"
+  //                         id="commnetButton"
+  //                         onClick={() => commentSubmit(item.id, item.comment)}
+  //                       >
+  //                         POST
+  //                       </span>
+  //                     </div>
+  //                   </div>
+  //                 </div>
+  //               ) : (
+  //                 " "
+  //               )}
+  //             </div>
+  //             {/* </div> */}
+  //           </div>
+  //         </div>
+  //       );
+  //     })}
+  //   </div>
+  //   </>
+  // );
+
+  return (
+    <div className="row"  >
+      <div className="col-8 offset-2">
+        {post.map((item, index) => {
+          return (
+            <>
+              <div className="card m-3" id="cardForPost">
+                <div className="row">
+                  <div className="col-2 col-lg-auto col-md-auto">
+                    <img
+                      src={item.photo_url}
+                      className="mr-3 rounded-circle"
+                      alt="Profile Picture"
+                      style={{ width: "50px" }}
+                    />
+                  </div>
+                  <div className="col-5 col-lg-auto">
+                    <h4>{item.user_name}</h4>
+                    <div className="col" id="ago">
+                      <ReactTimeAgo
+                        date={JSON.parse(item.date)}
+                        locale="en-US"
+                      />
+                    </div>
+                  </div>
+                  <div
+                    class="col-sm-4 col-lg-7 col-md-4"
+                    style={{ textAlign: "end", marginTop: "5px" }}
+                  >
+                    {user.email == item.user_id ? (
+                      // <div className="dropdown">
+                      <>
+                        <button
+                          className="btn btn-secondary"
+                          type="button"
+                          id="dropdownMenuButton1"
+                          data-bs-toggle="dropdown"
+                          aria-expanded="false"
+                        >
+                          <i className="fa-solid fa-ellipsis"></i>
+                        </button>
+                        <ul
+                          className="dropdown-menu"
+                          aria-labelledby="dropdownMenuButton1"
+                        >
+                          <li>
+                            <a
+                              key={item.id}
+                              className="dropdown-item"
+                              onClick={() => edit(item.id)}
+                            >
+                              Edit
+                            </a>
+                          </li>
+                          <li>
+                            <a
+                              className="dropdown-item"
+                              onClick={() => del(item.id)}
+                            >
+                              Delete
+                            </a>
+                          </li>
+                        </ul>
+                      </>
+                    ) : (
+                      // </div>
+                      <></>
+                    )}
+                  </div>
+                  <div className="row" style={{ marginTop: "10px" }}>
+                    <div className="col-lg-auto col-sm-auto col-md-auto">
+                      <p>
+                        {item.description}{" "}
+                        {item.hash &&
+                          item.hash.length > 0 &&
+                          item.hash.map((hashTag, hasindex) => {
+                            return <span key={hasindex}>{hashTag}</span>;
+                          })}
                       </p>
                     </div>
-                    <div className="mediaIcon2">
-                      <span
-                        id={setColor(item.comment) === "gry" ? "gry" : "blue"}
-                        onClick={() =>
-                          commentPost(item.id, item.comment, index)
-                        }
-                      >
-                        {console.log("index : ", index)}
-                        {console.log("value of showTextBox :", showTextBox)}
-                        <i className="fa-sharp fa-solid fa-comments fa-2xl" />
-                      </span>
-                    </div>
                   </div>
-
-                  <div className={favCss ? "mediaIconFav3" : "mediaIcon3"}>
-                    <span
-                      id={setColorOfHeart(item.fav) === "gry" ? "gry" : "red"}
-                      onClick={() => favPost(item.id, item.fav)}
-                    >
-                      <i className="fa-sharp fa-solid fa-heart fa-2xl" />
-                    </span>
-                    <p className="favCount">
-                      {item.fav === undefined ? " " : item.fav.length}
-                    </p>
+                  <div className="row" id="photoSlider">
+                    <Slider {...settings}>
+                      {item.imageURL &&
+                        item.imageURL.length > 0 &&
+                        item.imageURL.map((singleImage) => {
+                          console.log("singleImage:", singleImage);
+                          return (
+                            <div key={singleImage.file} className="mydivv">
+                              {singleImage.type.includes("image") ? (
+                                <img
+                                  src={singleImage.file}
+                                  alt="Post Image"
+                                  className="myimg"
+                                />
+                              ) : (
+                                <video className="myimg">
+                                  <source src={singleImage.file}></source>
+                                </video>
+                              )}
+                            </div>
+                          );
+                        })}
+                    </Slider>
                   </div>
-                </div>
-                {showTextBox === index ? (
-                  <div className="com">
-                    <div className="showComment">
-                      {item.comment === undefined
-                        ? ""
-                        : item.comment.map((c) => {
-                            return (
-                              <>
-                                <li>
-                                  {c.user_name} : {c.text}
-                                  <ReactTimeAgo
-                                    date={JSON.parse(c.date)}
-                                    locale="en-US"
-                                    id="timeAgo"
-                                  />
-                                </li>
-                              </>
-                            );
-                          })}
+                  <div className="row">
+                    <div className="col-4" style={{ textAlign: "center" }}>
+                      <div className="text-muted mt-2" id="iconId">
+                        <div className="mediaIcon1">
+                          <span
+                            id={setColor(item.like) === "gry" ? "gry" : "blue"}
+                            onClick={() => likePost(item.id, item.like)}
+                          >
+                            <i className="fa-sharp fa-solid fa-thumbs-up fa-2xl" />
+                          </span>
+                          <p className="likeCount">
+                            {item.like === undefined ? " " : item.like.length}
+                          </p>
+                        </div>
+                      </div>
                     </div>
-                    <div className="input-group mb-3" id="commentSection">
-                      <input
-                        type="text"
-                        className="form-control"
-                        placeholder="Add comment"
-                        aria-label="Recipient's username"
-                        aria-describedby="basic-addon2"
-                        id="commentTextBox"
-                        value={text}
-                        onChange={commentText}
-                      />
-                      <div className="input-group-append">
+                    <div className="col-4" style={{ textAlign: "center" }}>
+                      <div className="mediaIcon2">
                         <span
-                          className="input-group-text"
-                          id="commnetButton"
-                          onClick={() => commentSubmit(item.id, item.comment)}
+                          id={setColor(item.comment) === "gry" ? "gry" : "blue"}
+                          onClick={() =>
+                            commentPost(item.id, item.comment, index)
+                          }
                         >
-                          POST
+                          {console.log("index : ", index)}
+                          {console.log("value of showTextBox :", showTextBox)}
+                          <i className="fa-sharp fa-solid fa-comments fa-2xl" />
                         </span>
                       </div>
                     </div>
+                    <div className="col-4" style={{ textAlign: "center" }}>
+                      <div className={favCss ? "mediaIconFav3" : "mediaIcon3"}>
+                        <span
+                          id={
+                            setColorOfHeart(item.fav) === "gry" ? "gry" : "red"
+                          }
+                          onClick={() => favPost(item.id, item.fav)}
+                        >
+                          <i className="fa-sharp fa-solid fa-heart fa-2xl" />
+                        </span>
+                        <p className="favCount">
+                          {item.fav === undefined ? " " : item.fav.length}
+                        </p>
+                      </div>
+                    </div>
                   </div>
-                ) : (
-                  " "
-                )}
+                  {showTextBox === index ? (
+                    <div className="row">
+                      <div>
+                        {item.comment === undefined
+                          ? ""
+                          : item.comment.map((c) => {
+                              return (
+                                <>
+                                  {/* <li> */}
+                                  <div className="row">
+                                    <div
+                                      className="col-lg-6 col-sm-auto col-md-6"
+                                      style={{ textAlign: "center" }}
+                                    >
+                                      {" "}
+                                      {c.user_name} : {c.text}
+                                    </div>
+                                    <div
+                                      className="col-lg-4 col-sm-auto col-md-4"
+                                      style={{ textAlign: "end" }}
+                                      id="commentBoxTimeAgo"
+                                    >
+                                      <ReactTimeAgo
+                                        date={JSON.parse(c.date)}
+                                        locale="en-US"
+                                        id="timeAgo"
+                                      />
+                                    </div>
+                                  </div>
+                                  {/* </li> */}
+                                </>
+                              );
+                            })}
+                      </div>
+                      <div className="input-group mb-3" id="commentSection">
+                        <input
+                          type="text"
+                          className="form-control"
+                          placeholder="Add comment"
+                          aria-label="Recipient's username"
+                          aria-describedby="basic-addon2"
+                          id="commentTextBox"
+                          value={text}
+                          onChange={commentText}
+                        />
+                        <div className="input-group-append">
+                          <span
+                            className="input-group-text"
+                            id="commnetButton"
+                            onClick={() => commentSubmit(item.id, item.comment)}
+                          >
+                            <i
+                              class="fa-sharp fa-solid fa-paper-plane"
+                              id="planIcon"
+                            ></i>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  ) : (
+                    " "
+                  )}
+                </div>
               </div>
-              {/* </div> */}
-            </div>
-          </div>
-        );
-      })}
+            </>
+          );
+        })}
+      </div>
     </div>
-    </>
   );
 };
 

@@ -133,56 +133,66 @@ export const Home = () => {
 
   return (
     <>
-      <div className="mediaOfNav">
-        <div class="dropdown">
-          <button
-            class="btn btn-secondary dropdown-toggle"
-            type="button"
-            id="dropdownMenuButton"
-            data-bs-toggle="dropdown"  // Updated attribute name from "data-toggle" to "data-bs-toggle"
-            aria-haspopup="true"
-            aria-expanded="false"
-            style={{ background: "white"  , border:"solid white"}}
-          >
-            <img
-              src={photo}
-              className="mr-3 rounded-circle"
-              alt="Profile Picture"
-              style={{ width: 40 }}
-            />
-          </button>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" onClick={goToProfilePage} >
-              Manage Profile
-            </a>
-            <a class="dropdown-item" onClick={handleLogOut}>
-              logOut
-            </a>
+      <div className="row">
+        <div
+          className="col-lg-7 col-sm-9 col-md-8"
+          style={{ textAlign: "end" }}
+        >
+          <div className="HomeDiv">
+            <input
+              type="text"
+              placeholder="What's in your mind?"
+              className="postText"
+              onClick={handleAdd}
+            ></input>
+          </div>
+        </div>
+        <div
+          className="col-lg-5 col-sm-3 col-md-4"
+          style={{ textAlign: "end" }}
+        >
+          <div class="dropdown">
+            <button
+              class="btn btn-secondary dropdown-toggle"
+              type="button"
+              id="dropdownMenuButton"
+              data-bs-toggle="dropdown" // Updated attribute name from "data-toggle" to "data-bs-toggle"
+              aria-haspopup="true"
+              aria-expanded="false"
+              style={{ background: "white", border: "solid white" }}
+            >
+              <img
+                src={photo}
+                className="mr-3 rounded-circle"
+                alt="Profile Picture"
+                style={{ width: 40 }}
+              />
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" onClick={goToProfilePage}>
+                Manage Profile
+              </a>
+              <a class="dropdown-item" onClick={handleLogOut}>
+                logOut
+              </a>
+            </div>
           </div>
         </div>
       </div>
-      <div className="HomeDiv">
-        <input
-          type="text"
-          placeholder="What's in your mind?"
-          className="postText"
-          onClick={handleAdd}
-        ></input>
-        <ToastContainer
-          position="bottom-center"
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="dark"
-        />
-        
+      <ToastContainer
+        position="bottom-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
         {postData.length > 0 && <ShowPost post={postData} />}
-      </div>
+
     </>
   );
 };

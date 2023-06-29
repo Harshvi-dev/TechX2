@@ -1,36 +1,35 @@
-.img{    
+/* .img{    
     width: 22%;
     margin-left: 268px;
 }
 .mediaIcon1{
     margin: 0px 0px 0px 56px;
     font-size: 15px;
-    /* border: solid rebeccapurple; */
+    
     width: 50px;
-    /* color: rgba(10,111,243,255); */
+    
 
 }
 
 .mediaIcon2{
     margin: 0px 0px 0px 204px;
     font-size: 15px;
-    /* border: solid red; */
-    width: 50px;
-    /* color: rgba(10,111,243,255); */
+       width: 50px;
+    
 
 }
 .mediaIcon3{
     margin: -39px 0px 0px 529px;
     font-size: 15px;
-    /* border: solid blue; */
+   
     width: 50px;
-    /* color: rgba(10,111,243,255); */
+   
 
 }
 #dropdownMenuButton1{
     color: rgba(10,111,243,255);
     margin-left: 513px;
-    /* margin-bottom: -52px; */
+   
     margin-top: -94px;
     font-size: 30px;
     background-color: white;
@@ -38,9 +37,9 @@
 }
 
 #iconId{
-    /* border: solid red; */
+   
     padding-top: 27px;
-    /* margin: 23px 23px 23px 23px; */
+   
     display: flex;
 
 }
@@ -67,27 +66,26 @@
 }
 #commentSection{
     margin: 7px 0px 0px 0px;
-    /* border: solid rgb(27, 193, 66); */
+   
     width: 81%;
 }
 .mediaIconFav3{ 
-    /* margin: -96px 0px 0px 529px; */
+   
     margin: -39px 0px 0px 529px;
     font-size: 15px;
-    /* border: solid blue; */
-    width: 50px;
-    /* color: rgba(10,111,243,255); */
    
+    width: 50px;
+      
 }
 .showComment{
-    /* border: solid red; */
+   
     width: 100%;
-    /* display: flex; */
+   
 }
 .showComment li{
     list-style: none;
     margin: 4px 0px 0px 112px;
-    /* border: solid rebeccapurple; */
+   
     width: 67%;
 
 }
@@ -96,4 +94,60 @@
     color: rgba(10,111,243,255);
     position: relative;
     font-size: 11px;
+} */
+#cardForPost{
+    padding: 10px;
+}
+#commentSection{
+    width: 90%;
+    margin-left:23px ;
+}
+#mainDiv{
+    width: 55%;
+    text-align: center;
+    margin: auto;
+    width: 50%;
+    background-color: rgb(246, 243, 243);
+}
+#ago{
+    font-size: 15px;
+    /* border: solid rebeccapurple; */
+    color: rgba(10,111,243,255);
+    margin: -12px 48px 1px -3px;
+}
+#photoSlider{
+  margin-bottom: 23px;
+}
+.myimg{
+    display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 30%;
+  border-radius: 15px;
+}
+#gry{
+    color: gray;
+}
+#blue {
+ color:rgba(10,111,243,255);   
+}
+#red{
+    color: rgb(199, 60, 60);
+}
+#commentBoxTimeAgo{
+    font-size: 15px;
+    color: rgba(10,111,243,255);
+}
+#planIcon{
+    font-size: 25px;
+}
+#commnetButton{
+    width: 50px;
+    height: 50px;
+}
+#dropdownMenuButton1{
+    background-color: white;
+    color: rgba(10,111,243,255);
+    font-size: 25px;
+    border: white;
 }
