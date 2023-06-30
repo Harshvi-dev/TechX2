@@ -102,6 +102,9 @@
     width: 90%;
     margin-left:23px ;
 }
+.has{
+    color: rgba(10,111,243,255);
+}
 #mainDiv{
     width: 55%;
     text-align: center;

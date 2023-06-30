@@ -64,7 +64,7 @@ const AddPost = () => {
   var current = new Date();
 
   const notify = (users) => {
-    console.log("users :", users);
+    console.log(" this are the users :", users);
     for (let i = 0; i < users.length; i++) {
       console.log("i:", users[i]);
       if (users[i].user_id === user.email) {
@@ -81,7 +81,7 @@ const AddPost = () => {
     // NEW IMPLEMENT
 
     const FIREBASE_API_KEY =
-      "AAAAmkVJRBg:APA91bHCkkQg-omxDIDJ9MoEBsqgJ2x66BuyPBakh9VSOaS027TNdvhtxecABB__JfuAG2LqMzK-J0GKoAoZIU46hGlR18mkQq6gc0QylhyX0DZrMjVWB1JouHVzE4oAe607K-0hVtsA";
+      "AAAAmkVJRBg:APA91bHCkkQg-omxDIDJ9MoEBsqgJ2x66BuyPBakh9VSOaS027TNdvhtxecABB__JfuAG2LqMzK-J0GKoAoZIU46hGlR18mkQq6gc0QylhyX0DZrMjVWB1JouHVzE4oAe607K-0hVtsA"
 
     const message = {
       registration_ids: [accessToken],
@@ -124,18 +124,8 @@ const AddPost = () => {
     if (imageUrls.length > 0) {
       addSetUrl(imageUrls);
     }
-    // console.log("edit like :", likePost);
-    // console.log("edit fav :", favPost);
-    // console.log("edit comment :", commentPost);
-
-    // console.log("POST DATA", userdata);
-    // getUserData()
   }, [url, imageUrls]);
 
-  // onMessageListener().then((payload) => {
-  //   setNotification({title: payload.notification.title, body: payload.notification.body})
-  //   console.log("payload",payload);
-  // }).catch(err => console.log('failed: ', err));
   const back = () => {
     navigate("/home");
   };
@@ -201,13 +191,7 @@ const AddPost = () => {
     } else {
       dec = text;
     }
-    // setText(dec)
-    // console.log("desciption after removing #:", text);
-
     getUserData();
-    // alert("hello")
-
-    // let arr = [];
 
     const imgUploading = await uploadImagesinStorage();
 
@@ -318,18 +302,20 @@ const AddPost = () => {
     console.log("item:", iteam);
     return (
       <>
-        <div className="imgPrint">
+        <div className="row" id="imgPrint">
           {checkFileType(iteam.type) ? (
-            <img src={iteam.file} id="img"></img>
+           <div className="col-6" > <img src={iteam.file} id="img"></img></div>
           ) : (
-            <video id="vid">
+            <div className="col-6" > <video id="vid">
               {" "}
               <source src={iteam.file} />
-            </video>
+            </video></div>
           )}
-          <button className="imgDel" onClick={del} id={index}>
+          {/* {vidImg?<video id="vid"> <source src={iteam}/></video>:<video id="vid"> <source src={iteam}/></video>} */}
+          <div className="col-6" style={{ textAlign:"end"}}><button className="imgDel" onClick={del} id={index}>
             <i className="fa-solid fa-xmark"></i>
           </button>
+          </div>
         </div>
       </>
     );
@@ -383,7 +369,7 @@ const AddPost = () => {
       description: dec,
       hash: regResult || [],
       imageURL: arr,
-      user_id: localStorage.getItem("email"),
+      user_id: user.email,
       date: JSON.stringify(current),
       like: likePost,
       fav: favPost,
@@ -397,108 +383,6 @@ const AddPost = () => {
     }, 3000);
   };
 
-  // return (
-  //   <>
-  //     <div className="HomeDiv">
-  //       <div className="justify">
-  //         {id === undefined ? (
-  //           <h2 className="title">Create Post</h2>
-  //         ) : (
-  //           <h2 className="title">Edit Post</h2>
-  //         )}
-  //         <button className="icon" onClick={back}>
-  //           <i className="fa-solid fa-xmark"></i>
-  //         </button>
-  //       </div>
-  //       <hr />
-
-  //       {!!cmp ? (
-  //         <>
-  //           <div>
-  //             <textarea
-  //               className="tArea"
-  //               rows="30"
-  //               cols="500"
-  //               value={text}
-  //               onChange={getVal}
-  //             />
-  //           </div>
-  //           <div className="showImg">
-  //             {url &&
-  //               url.length > 0 &&
-  //               url.map((iteam, index) => printImg(iteam, index))}
-  //           </div>
-  //           <div className="photo">
-  //             <label htmlFor="file-input">
-  //               <i className="fa-sharp fa-solid fa-image" id="photoIcon"></i>
-  //             </label>
-  //             <p>Photo/Video</p>
-  //             <input
-  //               type="file"
-  //               id="file-input"
-  //               accept="image/png , image/jpeg,video/mp4,video/x-m4v"
-  //               onChange={srcImg}
-  //             />
-  //           </div>
-  //           <div className="Cam" onClick={handelCam}>
-  //             <i className="fa-solid fa-camera" id="photoIcon"></i>
-  //             <p>Camera</p>
-  //           </div>
-  //         </>
-  //       ) : (
-  //         <div>
-  //           <Camera
-  //             setcmaUrl={setUploadImg}
-  //             setadd={addSetUrl}
-  //             setcmp={setcmp}
-  //           />
-  //         </div>
-  //       )}
-  //       {id === undefined ? (
-  //         <div>
-  //           {console.log(
-  //             "text:",
-  //             text,
-  //             "url:",
-  //             url.length,
-  //             "image:",
-  //             imageUrls.length
-  //           )}
-  //           <button
-  //             className="Post"
-  //             disabled={url.length == 0 && text == ""}
-  //             onClick={addPost}
-  //           >
-  //             <b>Post</b>
-  //           </button>
-  //         </div>
-  //       ) : (
-  //         <div>
-  //           <button
-  //             className="Post"
-  //             disabled={url && url.length == 0 && text == ""}
-  //             onClick={addPost}
-  //           >
-  //             <b>Edit</b>
-  //           </button>
-  //         </div>
-  //       )}
-
-  //       <ToastContainer
-  //         position="bottom-center"
-  //         autoClose={5000}
-  //         hideProgressBar={false}
-  //         newestOnTop={false}
-  //         closeOnClick
-  //         rtl={false}
-  //         pauseOnFocusLoss
-  //         draggable
-  //         pauseOnHover
-  //         theme="dark"
-  //       />
-  //     </div>
-  //   </>
-  // );
   return (
     <>
       <div className="row justify-content-center ">
@@ -521,7 +405,7 @@ const AddPost = () => {
         </div>
       </div>
       <div className="row justify-content-center ">
-        <div className="col-lg-auto col-sm-auto ">
+        <div className="col-lg-auto col-sm-12 ">
           {!!cmp ? (
             <>
               <div>
@@ -536,14 +420,14 @@ const AddPost = () => {
                 />
               </div>
               <div className="row justify-content-center">
-                <div className="col-12"style={{border:"solid red"}}>
+                
                 <div className="showImg">
                   {url &&
                     url.length > 0 &&
                     url.map((iteam, index) => printImg(iteam, index))}
                 </div>
               </div>
-              </div>
+              
               <div className="row">
                 <div className="col-5 col-sm-5" style={{ textAlign: "center" }}>
                   <div className="photo">
@@ -590,7 +474,7 @@ const AddPost = () => {
                     </button>
                   </div>
                 ) : (
-                  <div >
+                  <div className="col-12" style={{ textAlign:"center"}}>
                     <button
                       className="Post"
                       disabled={url && url.length == 0 && text == ""}

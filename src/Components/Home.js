@@ -7,8 +7,9 @@ import ShowPost from "./ShowPost";
 import {
   database,
   requestFirebaseNotificationPermission,
-  onMessageListener,
+  onMessageListener
 } from "../Config";
+import {getToken, onMessage } from "firebase/messaging"
 import { ref, onValue, push, update, set, remove } from "firebase/database";
 import { messaging } from "../Config";
 import { ToastContainer, toast } from "react-toastify";
@@ -27,14 +28,23 @@ export const Home = () => {
 
   var userPhoto = JSON.parse(localStorage.getItem("user"));
   var photo = userPhoto.photoUrl;
-  console.log("photo url:", photo);
+  // console.log("photo url:", photo);
 
-  onMessageListener().then((paylaoad) => {
-    console.log("PAYLOAD", paylaoad);
-    toast(`${paylaoad.notification.title} : ${paylaoad.notification.body}`, {
-      position: toast.POSITION.TOP_RIGHT,
-    });
-  });
+  // onMessageListener().then((paylaoad) => {
+  //   console.log("PAYLOAD", paylaoad);
+  //   toast(`${paylaoad.notification.title} : ${paylaoad.notification.body}`, {
+  //     position: toast.POSITION.TOP_RIGHT,
+  //   });
+  // });
+
+  if (localStorage.getItem('token') === "undefined" || localStorage.getItem('token') === null) {
+    // fetchToken()
+    requestFirebaseNotificationPermission().then((token) => {
+      console.log("THIS IS THE TOKEN WE WANT", token)
+      sendMessage(token)
+    }).catch((error) => {
+      console.log("ERROR WHILE GET TOKEN", error)
+    })}
 
   const sendMessage = async (token) => {
     const accessToken = token;
@@ -91,7 +101,8 @@ export const Home = () => {
         console.log("POST DATA", postData);
       }
     });
-    console.log("url:", user);
+    // console.log("url:", user);
+    
   }, []);
 
   const goToProfilePage = () => {
@@ -135,7 +146,7 @@ export const Home = () => {
     <>
       <div className="row">
         <div
-          className="col-lg-7 col-sm-9 col-md-8"
+          className="col-lg-7 col-sm-9 col-md-8 col-xs-auto"
           style={{ textAlign: "end" }}
         >
           <div className="HomeDiv">

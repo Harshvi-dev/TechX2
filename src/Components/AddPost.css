@@ -72,7 +72,7 @@ hr{
     width: 150px;
     margin:10px 10px 10px 10px;
 }
-.imgPrint{
+#imgPrint{
     border: solid rgba(10,111,243,255);
     border-radius: 10px;
     /* width: 84%; */
@@ -82,6 +82,7 @@ hr{
 .imgDel{
     background-color: rgb(246, 243, 243);
     border: rgb(246, 243, 243);
+    margin-top: 50px;
 }
 .imgDel > i{
     font-size: 25px;
@@ -90,6 +91,7 @@ hr{
     height: 150px;
     width: 150px;
     /* margin:13px 364px 9px 17px; */
+    margin:10px 10px 10px 10px;
 
 }
 /* .HomeDiv{

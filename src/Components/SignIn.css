@@ -1,4 +1,4 @@
-.loginBtn{
+/* .loginBtn{
     width: 220%;
     border-radius: 9px;
     background-color: rgba(10,111,243,255);
@@ -11,13 +11,11 @@
 }
 #icon{
     margin: 0px 23px 0px 0px;
-    /* padding: 23px 23px 23px 23px; */
     color : rgb(249, 245, 245);
     position: relative;
     font-size: 30px;
 }
 .bigCon{
-    /* border: solid red; */
     padding: 0px 0px 0px 242px;
     margin: 45px 0px 0px 0px;
 }
@@ -36,4 +34,34 @@
 }
 .tech{
     margin: 0px 0px 0px -54px;
+} */
+.x{
+    color: rgba(10,111,243,255);
+    /* margin: -62px 0px 0px 60px; */
+    font-size: 61px;
+}
+.tech{
+    /* margin: 0px 0px 0px -54px; */
+    font-size: 50px;
+}
+.loginBtn{
+    
+    border-radius: 9px;
+    background-color: rgba(10,111,243,255);
+    color: white;
+    padding: 11px;
+    font-size: 28px;
+    font-family: Arial, Helvetica, sans-serif;
+    border: solid rgba(10,111,243,255) 1px;
+}
+#icon{
+    color : rgb(249, 245, 245);
+     margin: 0px 17px 0px 0px;
+    font-size: 30px;
+}
+#cardOfLogIn{
+    width: 50%;
+    margin-top: 23px;
+    margin-bottom: 23px;
+    padding: 23px;
 }

@@ -33,8 +33,8 @@ const ShowPost = ({ post }) => {
   console.log("POST TO BE DISPLAY", post);
   // post.reverse();
   const currentDate = new Date().toISOString();
-  console.log("currentDate", currentDate);
-  console.log("POST TO BE DISPLAY", post);
+  // console.log("currentDate", currentDate);
+  // console.log("POST TO BE DISPLAY", post);
   const navigate = useNavigate();
   const settings = {
     dots: true,
@@ -211,210 +211,8 @@ const ShowPost = ({ post }) => {
       }
     }
   };
-  // return (
-  //   <>
-  //   <div className="container">
-  //     {post.map((item, index) => {
-  //       console.log(
-  //         "inside main return functioin value of showTextBox :",
-  //         item
-  //       );
-  //       return (
-  //         <div className="container" key={item.id}>
-  //           <div className="card mt-5">
-  //             <div className="card-body">
-  //               <div className="media">
-  //                 <img
-  //                   src={item.photo_url}
-  //                   className="mr-3 rounded-circle"
-  //                   alt="Profile Picture"
-  //                   style={{ width: 60 }}
-  //                 />
-  //                 {user.email == item.user_id ? (
-  //                   <div className="dropdown">
-  //                     <button
-  //                       className="btn btn-secondary"
-  //                       type="button"
-  //                       id="dropdownMenuButton1"
-  //                       data-bs-toggle="dropdown"
-  //                       aria-expanded="false"
-  //                     >
-  //                       <i className="fa-solid fa-ellipsis"></i>
-  //                     </button>
-  //                     <ul
-  //                       className="dropdown-menu"
-  //                       aria-labelledby="dropdownMenuButton1"
-  //                     >
-  //                       <li>
-  //                         <a
-  //                           key={item.id}
-  //                           className="dropdown-item"
-  //                           onClick={() => edit(item.id)}
-  //                         >
-  //                           Edit
-  //                         </a>
-  //                       </li>
-  //                       <li>
-  //                         <a
-  //                           className="dropdown-item"
-  //                           onClick={() => del(item.id)}
-  //                         >
-  //                           Delete
-  //                         </a>
-  //                       </li>
-  //                     </ul>
-  //                   </div>
-  //                 ) : (
-  //                   <></>
-  //                 )}
-  //                 <ToastContainer
-  //                   position="bottom-center"
-  //                   autoClose={5000}
-  //                   hideProgressBar={false}
-  //                   newestOnTop={false}
-  //                   closeOnClick
-  //                   rtl={false}
-  //                   pauseOnFocusLoss
-  //                   draggable
-  //                   pauseOnHover
-  //                   theme="dark"
-  //                 />
-  //                 {/* <div className="media-body"> */}
-  //                 <h5 className="mt-0">{item.user_name}</h5>
-  //                 <div>
-  //                   <ReactTimeAgo date={JSON.parse(item.date)} locale="en-US" />
-  //                 </div>
-
-  //                 <p>
-  //                   {item.description}{" "}
-  //                   {item.hash &&
-  //                     item.hash.length > 0 &&
-  //                     item.hash.map((hashTag, hasindex) => {
-  //                       return (
-  //                         <span key={hasindex} className="hashtag">
-  //                           {hashTag}
-  //                         </span>
-  //                       );
-  //                     })}
-  //                 </p>
-  //                 <Slider {...settings}>
-  //                   {item.imageURL &&
-  //                     item.imageURL.length > 0 &&
-  //                     item.imageURL.map((singleImage) => {
-  //                       console.log("singleImage:", singleImage);
-  //                       return (
-  //                         <div key={singleImage.file}>
-  //                           {singleImage.type.includes("image") ? (
-  //                             <img
-  //                               src={singleImage.file}
-  //                               alt="Post Image"
-  //                               className="img"
-  //                             />
-  //                           ) : (
-  //                             <video className="img">
-  //                               <source src={singleImage.file}></source>
-  //                             </video>
-  //                           )}
-  //                         </div>
-  //                       );
-  //                     })}
-  //                 </Slider>
-
-  //                 <div className="text-muted mt-2" id="iconId">
-  //                   <div className="mediaIcon1">
-  //                     <span
-  //                       id={setColor(item.like) === "gry" ? "gry" : "blue"}
-  //                       onClick={() => likePost(item.id, item.like)}
-  //                     >
-  //                       <i className="fa-sharp fa-solid fa-thumbs-up fa-2xl" />
-  //                     </span>
-  //                     <p className="likeCount">
-  //                       {item.like === undefined ? " " : item.like.length}
-  //                     </p>
-  //                   </div>
-  //                   <div className="mediaIcon2">
-  //                     <span
-  //                       id={setColor(item.comment) === "gry" ? "gry" : "blue"}
-  //                       onClick={() =>
-  //                         commentPost(item.id, item.comment, index)
-  //                       }
-  //                     >
-  //                       {console.log("index : ", index)}
-  //                       {console.log("value of showTextBox :", showTextBox)}
-  //                       <i className="fa-sharp fa-solid fa-comments fa-2xl" />
-  //                     </span>
-  //                   </div>
-  //                 </div>
-
-  //                 <div className={favCss ? "mediaIconFav3" : "mediaIcon3"}>
-  //                   <span
-  //                     id={setColorOfHeart(item.fav) === "gry" ? "gry" : "red"}
-  //                     onClick={() => favPost(item.id, item.fav)}
-  //                   >
-  //                     <i className="fa-sharp fa-solid fa-heart fa-2xl" />
-  //                   </span>
-  //                   <p className="favCount">
-  //                     {item.fav === undefined ? " " : item.fav.length}
-  //                   </p>
-  //                 </div>
-  //               </div>
-  //               {showTextBox === index ? (
-  //                 <div className="com">
-  //                   <div className="showComment">
-  //                     {item.comment === undefined
-  //                       ? ""
-  //                       : item.comment.map((c) => {
-  //                           return (
-  //                             <>
-  //                               <li>
-  //                                 {c.user_name} : {c.text}
-  //                                 <ReactTimeAgo
-  //                                   date={JSON.parse(c.date)}
-  //                                   locale="en-US"
-  //                                   id="timeAgo"
-  //                                 />
-  //                               </li>
-  //                             </>
-  //                           );
-  //                         })}
-  //                   </div>
-  //                   <div className="input-group mb-3" id="commentSection">
-  //                     <input
-  //                       type="text"
-  //                       className="form-control"
-  //                       placeholder="Add comment"
-  //                       aria-label="Recipient's username"
-  //                       aria-describedby="basic-addon2"
-  //                       id="commentTextBox"
-  //                       value={text}
-  //                       onChange={commentText}
-  //                     />
-  //                     <div className="input-group-append">
-  //                       <span
-  //                         className="input-group-text"
-  //                         id="commnetButton"
-  //                         onClick={() => commentSubmit(item.id, item.comment)}
-  //                       >
-  //                         POST
-  //                       </span>
-  //                     </div>
-  //                   </div>
-  //                 </div>
-  //               ) : (
-  //                 " "
-  //               )}
-  //             </div>
-  //             {/* </div> */}
-  //           </div>
-  //         </div>
-  //       );
-  //     })}
-  //   </div>
-  //   </>
-  // );
-
   return (
-    <div className="row"  >
+    <div className="row">
       <div className="col-8 offset-2">
         {post.map((item, index) => {
           return (
@@ -439,8 +237,8 @@ const ShowPost = ({ post }) => {
                     </div>
                   </div>
                   <div
-                    class="col-sm-4 col-lg-7 col-md-4"
-                    style={{ textAlign: "end", marginTop: "5px" }}
+                    class="col-sm-4 col-lg-7 col-md-4 col-sx-1"
+                    style={{ textAlign: "end"}}
                   >
                     {user.email == item.user_id ? (
                       // <div className="dropdown">
@@ -482,6 +280,18 @@ const ShowPost = ({ post }) => {
                       <></>
                     )}
                   </div>
+                  <ToastContainer
+                    position="bottom-center"
+                    autoClose={5000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                    theme="dark"
+                  />
                   <div className="row" style={{ marginTop: "10px" }}>
                     <div className="col-lg-auto col-sm-auto col-md-auto">
                       <p>
@@ -489,7 +299,7 @@ const ShowPost = ({ post }) => {
                         {item.hash &&
                           item.hash.length > 0 &&
                           item.hash.map((hashTag, hasindex) => {
-                            return <span key={hasindex}>{hashTag}</span>;
+                            return <span key={hasindex} className="has">{hashTag}</span>;
                           })}
                       </p>
                     </div>
